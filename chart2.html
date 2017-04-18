@@ -82,23 +82,23 @@
 
 <script>
     var data = {
-        title: 'Chart 2',
-        x_label: 'Month',
-        y_label: 'Billion pounds per year',
-        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+        title: 'Divorce by gender and age',
+        x_label: 'Age at divorce',
+        y_label: 'Total',
+        categories: ["Under 20", "20 to 24", "25 to 29", "30 to 34","35 to 39","40 to 44","45 to 49","50 to 54","55 to 59","60 and over"],
         series:  [{
-            name: 'g.d.p.',
-            data: [29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
+            name: 'Male',
+            data: [3, 531, 4907, 11824,  14764,  18089,  18718,  14497,  8788, 9443]
         },{
-            name: 'c.p.r.',
-            data: [129.9, 121.5, 106.4, 89.2, 74.0, 46.0, 85.6, 98.5, 108.4, 78.1, 70.6, 60.4]
+            name: 'Female',
+            data: [19,1394,8430,14979,15890,18593,17795,12395,6543,5783]
         }]
     }
     var settings = {
         tempo: 480
     }
 
-    $(document).ready(setupAudibleChart(data, settings));
+    $(document).ready(setupAudibleStackedBarChart(data, settings));
 </script>
 
 

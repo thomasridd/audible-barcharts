@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Audible Timeseries</title>
+    <title>Audible Barcharts</title>
 
     <!-- Bootstrap -->
     <link href="css/bootstrap.css" rel="stylesheet">
@@ -27,7 +27,7 @@
 <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
 </button>
-<a class="navbar-brand" href="#">Audible Timeseries</a>
+<a class="navbar-brand" href="#">Audible Barcharts</a>
 
 <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
@@ -58,9 +58,9 @@
 
     <div class="row">
         <div class="col-8 offset-2">
-            <h1 class="chart-page-title">Audible time series</h1>
+            <h1 class="chart-page-title">Audible bar-charts</h1>
             <div class = "instructions">
-                Press left and right to step along the timeline, up and down to switch between series, space to speak a data point, enter to play the entire series
+                [instructions]
             </div>
             <div id="container" class="chart-container" style="height: 400px"></div>
             <br/>
@@ -82,23 +82,23 @@
 
 <script>
     var data = {
-        title: 'Chart 1',
-        x_label: 'Month',
-        y_label: 'Billion pounds per year',
-        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+        title: 'Divorce by gender and age',
+        x_label: 'Age at divorce',
+        y_label: 'Total',
+        categories: ["Under 20", "20 to 24", "25 to 29", "30 to 34","35 to 39","40 to 44","45 to 49","50 to 54","55 to 59","60 and over"],
         series:  [{
-            name: 'g.d.p.',
-            data: [29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
+            name: 'Male',
+            data: [3, 531, 4907, 11824,  14764,  18089,  18718,  14497,  8788, 9443]
         },{
-            name: 'c.p.r.',
-            data: [129.9, 121.5, 106.4, 89.2, 74.0, 46.0, 85.6, 98.5, 108.4, 78.1, 70.6, 60.4]
+            name: 'Female',
+            data: [19,1394,8430,14979,15890,18593,17795,12395,6543,5783]
         }]
     }
     var settings = {
         tempo: 480
     }
 
-    $(document).ready(setupAudibleChart(data, settings));
+    $(document).ready(setupAudibleBarChart(data, settings));
 </script>
 
 
