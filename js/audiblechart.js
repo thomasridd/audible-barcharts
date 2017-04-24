@@ -392,6 +392,7 @@ function setupAudibleBarChart(data, settings) {
     var chart = drawAudibleBarchart(data);
     tempo = settings.tempo;
 
+    playDescription(chart);
 }
 
 function setupAudibleStackedBarChart(data, settings) {
@@ -407,4 +408,24 @@ function setupAudibleChart(data, settings) {
     tempo = settings.tempo;
 
     playSeries(chart, 0);
+}
+
+function playDescription(chart) {
+
+    var title = chart.title.textStr;
+    var xaxis = chart.xAxis[0].axisTitle.textStr;
+    var yaxis = chart.yAxis[0].axisTitle.textStr;
+    var start = chart.yAxis[0].categories[0];
+
+    var str = 'You are in a line graph. Title: ' + title + ', x-axis: ' + xaxis + '; y-axis: ' + yaxis + '.\n';
+    str = str + 'Bars go horizontally.\n';
+    str = str + 'Starting at ' + start + '.\n';
+    str = str + 'Press up and down to switch between bars. \n';
+    str = str + 'Press left to speak categories.\n';
+    str = str + 'Press right to speak series.\n';
+    str = str + 'Press space to speak data value.\n';
+
+    var msg = new SpeechSynthesisUtterance(str);
+    msg.volume = 1;
+    window.speechSynthesis.speak(msg);
 }
