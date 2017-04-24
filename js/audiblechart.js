@@ -407,7 +407,7 @@ function setupAudibleChart(data, settings) {
     var chart = drawAudibleTimeseries(data);
     tempo = settings.tempo;
 
-    playSeries(chart, 0);
+    playDescription(chart);
 }
 
 function playDescription(chart) {
@@ -415,9 +415,10 @@ function playDescription(chart) {
     var title = chart.title.textStr;
     var xaxis = chart.xAxis[0].axisTitle.textStr;
     var yaxis = chart.yAxis[0].axisTitle.textStr;
-    var start = chart.yAxis[0].categories[0];
 
-    var str = 'You are in a line graph. Title: ' + title + ', x-axis: ' + xaxis + '; y-axis: ' + yaxis + '.\n';
+    var start = chart.xAxis[0].categories[0];
+
+    var str = 'You are in a bar graph. Title: ' + title + ', x-axis: ' + xaxis + '; y-axis: ' + yaxis + '.\n';
     str = str + 'Bars go horizontally.\n';
     str = str + 'Starting at ' + start + '.\n';
     str = str + 'Press up and down to switch between bars. \n';

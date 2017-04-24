@@ -82,25 +82,24 @@
 
 <script>
     var data = {
-        title: 'Divorce by gender and age',
-        x_label: 'Age at divorce',
-        y_label: 'Total',
-        categories: ["Under 20", "20 to 24", "25 to 29", "30 to 34","35 to 39","40 to 44","45 to 49","50 to 54","55 to 59","60 and over"],
+        title: 'Selected police recorded crime offences in England and Wales: volumes and percentage change between year ending September 2015 and year ending September 2016',
+        x_label: 'Category of crime',
+        y_label: 'Recorded offences',
+        categories: ["Violence against the person", "Fraud offences", "Criminal damage and arson", "Vehicle offences", "Shoplifting", "Sexual offences", "Theft from the person"],
         series:  [{
-            name: 'Male',
-            data: [3, 531, 4907, 11824,  14764,  18089,  18718,  14497,  8788, 9443]
+            name: 'Oct 2014 to Sep 2015',
+            data: [882921,604248,520327,356394,331560,99615,80110]
         },{
-            name: 'Female',
-            data: [19,1394,8430,14979,15890,18593,17795,12395,6543,5783]
+            name: 'Oct 2015 to Sep 2016',
+            data: [1075511,622731,548674,376670,349296,112021,85095]
         }]
     }
     var settings = {
         tempo: 480
     }
 
-    $(document).ready(setupAudibleStackedBarChart(data, settings));
+    $(document).ready(setupAudibleBarChart(data, settings));
 </script>
-
 
 <footer>
     <div class="container">
