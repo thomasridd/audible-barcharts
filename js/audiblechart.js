@@ -344,6 +344,107 @@ function drawAudibleBarchart(data) {
     });
 }
 
+function drawAudibleColumnchart(data) {
+    return Highcharts.chart('container', {
+        chart: {
+            type:'column'
+        },
+        title: {
+            text: data.title
+        },
+        xAxis: {
+            categories: data.categories,
+            title: {
+                text: data.x_label
+            }
+        },
+        yAxis: {
+            title: {
+                text: data.y_label
+            }
+        },
+        plotOptions: {
+            series: {
+                cursor: 'pointer',
+                events: {
+                    click: function (e) {
+                        point = e.point;
+                        min = this.chart.yAxis[0].min;
+                        max = this.chart.yAxis[0].max;
+                        value = (point.y - min) / (max-min);
+
+                        activePoint = point.index;
+                        activeSeries = point.series.index;
+
+                        playNoteForTimeAtVolume(1, value, 1);
+                    }
+                }
+
+            }
+        },
+
+        series: data.series
+
+    }, function(chart){
+
+        $(document).keydown(function(e){
+            switch(e.which) {
+                case ENTER_KEY:
+                    // ENTER
+                    break;
+
+                case SPACE_KEY:
+                    // SPACE
+                    speakValue(chart, activeSeries, activePoint);
+                    break;
+
+                case UP_KEY:
+                    // LEFT
+                    speakPointLabel(chart, activeSeries, activePoint);
+                    break;
+
+                case LEFT_KEY:
+                    // UP
+                    if(activeSeries === 0 && activePoint === 0)
+                        break;
+
+                    activeSeries = activeSeries - 1;
+                    if(activeSeries < 0 ) {
+                        activeSeries = chart.series.length - 1;
+                        activePoint = activePoint - 1;
+                    }
+
+                    checkBar(chart, activeSeries, activePoint);
+                    break;
+
+                case DOWN_KEY:
+                    // RIGHT
+                    speakSeriesLabel(chart, activeSeries, activePoint);
+                    break;
+
+                case RIGHT_KEY:
+                    // DOWN
+                    if((activePoint === (chart.series[0].length - 1)) && (activeSeries === (chart.series.length - 1))) {
+                        break;
+                    }
+
+                    activeSeries = activeSeries + 1;
+                    if(activeSeries >= chart.series.length) {
+                        activeSeries = 0;
+                        activePoint = activePoint + 1;
+                    }
+
+                    checkBar(chart, activeSeries, activePoint);
+                    break;
+
+            }
+
+        })
+
+
+    });
+}
+
 function drawAudibleStackedBarchart(data) {
     return Highcharts.chart('container', {
         chart: {
@@ -395,6 +496,14 @@ function setupAudibleBarChart(data, settings) {
     playDescription(chart);
 }
 
+function setupAudibleColumnChart(data, settings) {
+
+    var chart = drawAudibleColumnchart(data);
+    tempo = settings.tempo;
+
+    playColumnDescription(chart);
+}
+
 function setupAudibleStackedBarChart(data, settings) {
 
     var chart = drawAudibleStackedBarchart(data);
@@ -424,6 +533,27 @@ function playDescription(chart) {
     str = str + 'Press up and down to switch between bars. \n';
     str = str + 'Press left to speak categories.\n';
     str = str + 'Press right to speak series.\n';
+    str = str + 'Press space to speak data value.\n';
+
+    var msg = new SpeechSynthesisUtterance(str);
+    msg.volume = 1;
+    window.speechSynthesis.speak(msg);
+}
+
+function playColumnDescription(chart) {
+
+    var title = chart.title.textStr;
+    var xaxis = chart.xAxis[0].axisTitle.textStr;
+    var yaxis = chart.yAxis[0].axisTitle.textStr;
+
+    var start = chart.xAxis[0].categories[0];
+
+    var str = 'You are in a bar graph. Title: ' + title + ', x-axis: ' + xaxis + '; y-axis: ' + yaxis + '.\n';
+    str = str + 'Bars go horizontally.\n';
+    str = str + 'Starting at ' + start + '.\n';
+    str = str + 'Press left and right to switch between bars. \n';
+    str = str + 'Press up to speak categories.\n';
+    str = str + 'Press down to speak series.\n';
     str = str + 'Press space to speak data value.\n';
 
     var msg = new SpeechSynthesisUtterance(str);
