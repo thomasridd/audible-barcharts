@@ -398,7 +398,7 @@ function drawAudibleColumnchart(data) {
                     speakValue(chart, activeSeries, activePoint);
                     break;
 
-                case UP_KEY:
+                case DOWN_KEY:
                     // LEFT
                     speakPointLabel(chart, activeSeries, activePoint);
                     break;
@@ -417,7 +417,7 @@ function drawAudibleColumnchart(data) {
                     checkBar(chart, activeSeries, activePoint);
                     break;
 
-                case DOWN_KEY:
+                case UP_KEY:
                     // RIGHT
                     speakSeriesLabel(chart, activeSeries, activePoint);
                     break;
@@ -549,11 +549,11 @@ function playColumnDescription(chart) {
     var start = chart.xAxis[0].categories[0];
 
     var str = 'You are in a bar graph. Title: ' + title + ', x-axis: ' + xaxis + '; y-axis: ' + yaxis + '.\n';
-    str = str + 'Bars go horizontally.\n';
+    str = str + 'Bars go vertically.\n';
     str = str + 'Starting at ' + start + '.\n';
     str = str + 'Press left and right to switch between bars. \n';
-    str = str + 'Press up to speak categories.\n';
-    str = str + 'Press down to speak series.\n';
+    str = str + 'Press down to speak categories.\n';
+    str = str + 'Press up to speak series.\n';
     str = str + 'Press space to speak data value.\n';
 
     var msg = new SpeechSynthesisUtterance(str);
